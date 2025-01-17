@@ -20,6 +20,13 @@ jobs:
           docker system prune -a -f
           docker volume prune -f
 
+    - name: login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        refistry: docker.io
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
     - name: Pull Docker Images and Package
       run: |
         images="${{ github.event.inputs.docker_images }}"
